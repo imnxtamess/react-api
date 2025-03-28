@@ -11,9 +11,16 @@ img {
 }
 
 header {
-  background-color: darkslategray;
+  background-color: darkcyan;
   padding: 2rem;
   color: white;
+  h1 {
+    padding: 0.5rem;
+    border: 3px solid white;
+    border-radius: 10px;
+    display: inline-block;
+    background-color: darkslategray;
+  }
 }
 
 .tableContainer {
@@ -23,6 +30,12 @@ header {
   margin-top: 0.5rem;
   color: white;
   border: 3px solid black;
+  h5 {
+    background-color: darkslategray;
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid white;
+  }
   .img_container {
     border: 2px solid black;
   }

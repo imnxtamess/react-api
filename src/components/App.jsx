@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const api_endpoint = "http://localhost:3000/api/v1/posts";
+const api_endpoint = "http://localhost:8000/api/v1/posts";
 
 export default function App() {
   const [posts, setPosts] = useState([]);
@@ -18,6 +18,13 @@ export default function App() {
       });
   }
 
+  function deleteData(url, slug) {
+    fetch(`${url}/${slug}`, { method: "DELETE" })
+      .then((res) => res.json())
+      .then((data) => {
+        setPosts(data);
+      });
+  }
   return (
     <>
       <header>
@@ -32,13 +39,13 @@ export default function App() {
                   <h5>{post.title}</h5>
                   <div className="img_container">
                     <img
-                      src={`http://localhost:3000/imgs/posts/${post.image}`}
+                      src={`http://localhost:8000/imgs/posts/${post.image}`}
                       alt=""
                     />
                   </div>
                 </div>
                 <button
-                  onClick={() => fetchData(api_endpoint)}
+                  onClick={() => deleteData(api_endpoint, post.slug)}
                   className="trashBtn"
                 >
                   Elimina 🗑️
