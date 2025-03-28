@@ -19,11 +19,9 @@ export default function App() {
   }
 
   function deleteData(url, slug) {
-    fetch(`${url}/${slug}`, { method: "DELETE" })
-      .then((res) => res.json())
-      .then((data) => {
-        setPosts(data);
-      });
+    fetch(`${url}/${slug}`, { method: "DELETE" }).then((res) => {
+      fetchData(api_endpoint);
+    });
   }
   return (
     <>
