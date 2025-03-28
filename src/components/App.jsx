@@ -32,6 +32,11 @@ export default function App() {
       fetchData(api_endpoint);
     });
   }
+
+  function editData(url, slug) {
+    console.log("You clicked me");
+  }
+
   return (
     <>
       <header>
@@ -40,7 +45,7 @@ export default function App() {
         </h1>
       </header>
       <div className="container my-5">
-        <table class="table table-striped">
+        <table className="table table-striped">
           <thead>
             <tr>
               <th scope="col">#slug</th>
@@ -51,7 +56,7 @@ export default function App() {
           </thead>
           <tbody>
             {posts.map((post) => (
-              <tr>
+              <tr key={post.slug}>
                 <th scope="row">{post.slug}</th>
                 <td>{post.title}</td>
                 <td>
@@ -62,8 +67,14 @@ export default function App() {
                 </td>
                 <td className="text-start">
                   <button
+                    onClick={() => editData(api_endpoint, post.slug)}
+                    className="Btn"
+                  >
+                    ✏️
+                  </button>
+                  <button
                     onClick={() => deleteData(api_endpoint, post.slug)}
-                    className="trashBtn"
+                    className="Btn"
                   >
                     🗑️
                   </button>
