@@ -6,46 +6,30 @@ body {
 }
 
 img {
-  width: 60px;
-  height: 60px;
+  width: 48px;
+  height: 36px;
 }
 
 header {
-  background-color: yellow;
+  background-color: rgb(22, 21, 21);
   padding: 2rem;
   color: white;
   h1 {
-    color: blue;
+    color: gray;
     padding: 0.5rem;
-    border: 3px solid blue;
-    border-radius: 10px;
     display: inline-block;
-    background-color: yellow;
     font-weight: 700;
+    strong {
+      color: white;
+    }
   }
 }
 
-.tableContainer {
-  height: 100px;
-  background-color: rgb(190, 183, 183);
+table {
   border-radius: 10px;
-  margin-top: 0.5rem;
-  color: white;
-  border: 3px solid black;
-  h5 {
-    background-color: rgba(45, 50, 53, 0.986);
-    padding: 5px;
-    border-radius: 10px;
-    border: 1px solid white;
-  }
-  .img_container {
-    border: 2px solid black;
-  }
 }
 
 .trashBtn {
-  background-color: rgba(45, 50, 53, 0.986);
   border-radius: 15px;
-  border: 2px solid white;
-  color: white;
+  border: 1px solid black;
 }

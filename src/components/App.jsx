@@ -36,33 +36,42 @@ export default function App() {
     <>
       <header>
         <h1>
-          Poste <strong>Italiane</strong>
+          Posts<strong>Blog</strong>
         </h1>
       </header>
       <div className="container my-5">
-        <div className="row">
-          {posts.map((post) => (
-            <div key={post.slug} className="col-12">
-              <div className="tableContainer d-flex justify-content-between align-items-center p-4">
-                <div className="d-flex align-items-center gap-3">
-                  <h5>{post.title}</h5>
-                  <div className="img_container">
-                    <img
-                      src={`http://localhost:8000/imgs/posts/${post.image}`}
-                      alt=""
-                    />
-                  </div>
-                </div>
-                <button
-                  onClick={() => deleteData(api_endpoint, post.slug)}
-                  className="trashBtn"
-                >
-                  Elimina 🗑️
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#slug</th>
+              <th scope="col">Name</th>
+              <th scope="col">Image</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {posts.map((post) => (
+              <tr>
+                <th scope="row">{post.slug}</th>
+                <td>{post.title}</td>
+                <td>
+                  <img
+                    src={`http://localhost:8000/imgs/posts/${post.image}`}
+                    alt=""
+                  />
+                </td>
+                <td className="text-start">
+                  <button
+                    onClick={() => deleteData(api_endpoint, post.slug)}
+                    className="trashBtn"
+                  >
+                    🗑️
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </>
   );
