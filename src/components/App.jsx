@@ -8,6 +8,10 @@ export default function App() {
     fetchData(api_endpoint);
   }, []);
 
+  /**
+   * Fetches data from the given API endpoint and updates the state with the retrieved posts.
+   * @param {string} url - The API endpoint to fetch data from.
+   */
   function fetchData(url) {
     fetch(url)
       .then((res) => res.json())
@@ -18,6 +22,11 @@ export default function App() {
       });
   }
 
+  /**
+   * Deletes a specific post identified by its slug from the API and refreshes the posts list.
+   * @param {string} url - The base API endpoint for deletion.
+   * @param {string} slug - The unique identifier of the post to delete.
+   */
   function deleteData(url, slug) {
     fetch(`${url}/${slug}`, { method: "DELETE" }).then((res) => {
       fetchData(api_endpoint);
@@ -26,7 +35,9 @@ export default function App() {
   return (
     <>
       <header>
-        <h1>Posts Blog</h1>
+        <h1>
+          Poste <strong>Italiane</strong>
+        </h1>
       </header>
       <div className="container my-5">
         <div className="row">

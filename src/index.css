@@ -2,7 +2,7 @@
 
 body {
   font-family: "Inter", sans-serif;
-  background-color: rgb(16, 76, 110);
+  background-color: rgba(45, 50, 53, 0.986);
 }
 
 img {
@@ -11,27 +11,29 @@ img {
 }
 
 header {
-  background-color: darkcyan;
+  background-color: yellow;
   padding: 2rem;
   color: white;
   h1 {
+    color: blue;
     padding: 0.5rem;
-    border: 3px solid white;
+    border: 3px solid blue;
     border-radius: 10px;
     display: inline-block;
-    background-color: darkslategray;
+    background-color: yellow;
+    font-weight: 700;
   }
 }
 
 .tableContainer {
   height: 100px;
-  background-color: darkcyan;
+  background-color: rgb(190, 183, 183);
   border-radius: 10px;
   margin-top: 0.5rem;
   color: white;
   border: 3px solid black;
   h5 {
-    background-color: darkslategray;
+    background-color: rgba(45, 50, 53, 0.986);
     padding: 5px;
     border-radius: 10px;
     border: 1px solid white;
@@ -42,7 +44,7 @@ header {
 }
 
 .trashBtn {
-  background-color: darkslategray;
+  background-color: rgba(45, 50, 53, 0.986);
   border-radius: 15px;
   border: 2px solid white;
   color: white;
