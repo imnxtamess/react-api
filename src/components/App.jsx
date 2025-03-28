@@ -20,18 +20,29 @@ export default function App() {
 
   return (
     <>
+      <header>
+        <h1>Posts Blog</h1>
+      </header>
       <div className="container my-5">
-        <div className="row  row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
+        <div className="row">
           {posts.map((post) => (
-            <div className="col">
-              <div className="card h-100">
-                <div className="card-img-top">
-                  <img
-                    src={`http://localhost:3000/imgs/posts/${post.image}`}
-                    alt={post.title}
-                  />
+            <div key={post.slug} className="col-12">
+              <div className="tableContainer d-flex justify-content-between align-items-center p-4">
+                <div className="d-flex align-items-center gap-3">
+                  <h5>{post.title}</h5>
+                  <div className="img_container">
+                    <img
+                      src={`http://localhost:3000/imgs/posts/${post.image}`}
+                      alt=""
+                    />
+                  </div>
                 </div>
-                <div className="card-body">{post.title}</div>
+                <button
+                  onClick={() => fetchData(api_endpoint)}
+                  className="trashBtn"
+                >
+                  Elimina 🗑️
+                </button>
               </div>
             </div>
           ))}
