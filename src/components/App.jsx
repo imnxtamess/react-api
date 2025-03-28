@@ -26,7 +26,10 @@ export default function App() {
             <div className="col">
               <div className="card h-100">
                 <div className="card-img-top">
-                  <img src={post.image} alt={post.title} />
+                  <img
+                    src={`http://localhost:3000/imgs/posts/${post.image}`}
+                    alt={post.title}
+                  />
                 </div>
                 <div className="card-body">{post.title}</div>
               </div>
