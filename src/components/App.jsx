@@ -38,6 +38,12 @@ export default function App() {
     });
   }
 
+  /**
+   * Updates a specific post identified by its slug using the API.
+   * @param {string} url - The base API endpoint for updating.
+   * @param {string} slug - The unique identifier of the post to update.
+   * @returns {Promise} - A promise that resolves with the updated post data.
+   */
   function editData(url, slug) {
     console.log("You clicked me");
     return fetch(`${url}/${slug}`, {
@@ -53,6 +59,11 @@ export default function App() {
       });
   }
 
+  /**
+   * Creates a new post using the API.
+   * @param {string} url - The base API endpoint for creating a new post.
+   * @returns {Promise} - A promise that resolves with the created post data.
+   */
   function createData(url) {
     return fetch(`${url}`, {
       method: "POST",
@@ -67,6 +78,11 @@ export default function App() {
       });
   }
 
+  /**
+   * Handles the click event for editing a post.
+   * Populates the form with the post data and sets the form state to editing mode.
+   * @param {string} slug - The unique identifier of the post to edit.
+   */
   function handleEditClick(slug) {
     console.log("Clicked Edit of" + slug);
     console.log("posts array", posts);
@@ -86,6 +102,11 @@ export default function App() {
     setIsForm(true);
   }
 
+  /**
+   * Handles the form submission for editing a post.
+   * Sends the updated data to the API and refreshes the posts list.
+   * @param {Event} e - The form submission event.
+   */
   function handleEditFormSubmit(e) {
     e.preventDefault();
     console.log("edit submit for", currentSlug);
@@ -95,6 +116,10 @@ export default function App() {
     });
   }
 
+  /**
+   * Handles input changes in the form and updates the form data state.
+   * @param {Event} e - The input change event.
+   */
   function handleInputChange(e) {
     const name = e.target.name;
     const value = e.target.value;
@@ -104,6 +129,11 @@ export default function App() {
     }));
   }
 
+  /**
+   * Handles the form submission for creating a new post.
+   * Sends the form data to the API and refreshes the posts list.
+   * @param {Event} e - The form submission event.
+   */
   function handleFormSubmit(e) {
     e.preventDefault();
     console.log("post added");
