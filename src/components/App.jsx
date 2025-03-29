@@ -55,7 +55,11 @@ export default function App() {
 
   function handleEditClick(slug) {
     console.log("Clicked Edit of" + slug);
-    const postToEdit = posts.find((post) => post.slug === slug);
+    console.log("posts array", posts);
+    console.log("slug to edit", slug);
+    const postToEdit = posts.find(
+      (post) => post.slug.toLowerCase() === slug.toLowerCase()
+    );
     if (postToEdit) {
       setFormData({
         title: postToEdit.title,
