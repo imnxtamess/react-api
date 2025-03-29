@@ -48,9 +48,11 @@ export default function App() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
-    }).then((res) => {
-      console.log(res);
-    });
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
   }
 
   function handleEditClick(slug) {
@@ -63,6 +65,8 @@ export default function App() {
     e.preventDefault();
     console.log("edit submit for", currentSlug);
     editData(api_endpoint, currentSlug);
+    setIsForm(false);
+    fetchData(api_endpoint);
   }
 
   function handleInputChange(e) {
