@@ -40,7 +40,7 @@ export default function App() {
 
   function editData(url, slug) {
     console.log("You clicked me");
-    fetch(`${url}/${slug}`, {
+    return fetch(`${url}/${slug}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -109,10 +109,7 @@ export default function App() {
                 <th scope="row">{post.slug}</th>
                 <td>{post.title}</td>
                 <td>
-                  <img
-                    src={`http://localhost:8000/imgs/posts/${post.image}`}
-                    alt={post.title}
-                  />
+                  <img src={post.image} alt={post.title} />
                 </td>
                 <td className="text-start">
                   <button
