@@ -1,9 +1,16 @@
 import { useEffect, useState } from "react";
 
 const api_endpoint = "http://localhost:8000/api/v1/posts";
-
 export default function App() {
   const [posts, setPosts] = useState([]);
+  const [isForm, setIsForm] = useState(false);
+  const [formData, setFormData] = useState({
+    title: "",
+    slug: "",
+    tags: "",
+    image: "",
+    content: "",
+  });
   useEffect(() => {
     fetchData(api_endpoint);
   }, []);
@@ -37,6 +44,29 @@ export default function App() {
     console.log("You clicked me");
   }
 
+  function handleEditClick(slug) {
+    console.log("Clicked Edit of" + slug);
+    setIsForm(true);
+  }
+
+  function handleFormSubmit(e) {
+    e.preventDefault();
+    console.log(e);
+  }
+
+  function handleInputChange(e) {
+    const name = e.target.name;
+    const value = e.target.value;
+    console.log(name);
+    console.log(value);
+    console.log(e.target);
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+    console.log(formData);
+  }
+
   return (
     <>
       <header>
@@ -67,7 +97,7 @@ export default function App() {
                 </td>
                 <td className="text-start">
                   <button
-                    onClick={() => editData(api_endpoint, post.slug)}
+                    onClick={() => handleEditClick(post.slug)}
                     className="Btn"
                   >
                     ✏️
@@ -83,6 +113,91 @@ export default function App() {
             ))}
           </tbody>
         </table>
+
+        <form
+          onSubmit={handleFormSubmit}
+          className={
+            isForm
+              ? "text-center py-5 row flex-column justify-content-center"
+              : "d-none"
+          }
+        >
+          <h1>Edit Post</h1>
+          <div className="input-group mb-3">
+            <span className="input-group-text" id="basic-addon1">
+              Title
+            </span>
+            <input
+              onChange={(e) => handleInputChange(e)}
+              type="text"
+              className="form-control"
+              placeholder="Write the post title here..."
+              aria-label="title"
+              aria-describedby="basic-addon1"
+              name="title"
+            ></input>
+          </div>
+
+          <div className="input-group mb-3">
+            <span className="input-group-text" id="slugHelper">
+              Slug
+            </span>
+            <input
+              onChange={(e) => handleInputChange(e)}
+              type="text"
+              className="form-control"
+              placeholder="Write the post slug here..."
+              aria-label="slug"
+              aria-describedby="slugHelper"
+              name="slug"
+            ></input>
+          </div>
+          <div className="input-group mb-3">
+            <span className="input-group-text" id="tagsHelper">
+              Tags
+            </span>
+            <input
+              onChange={(e) => handleInputChange(e)}
+              type="text"
+              className="form-control"
+              placeholder="Write the post tags here..."
+              aria-label="tags"
+              aria-describedby="tagsHelper"
+              name="tags"
+            ></input>
+          </div>
+          <div className="input-group mb-3">
+            <span className="input-group-text" id="imageHelper">
+              Image
+            </span>
+            <input
+              onChange={(e) => handleInputChange(e)}
+              type="text"
+              className="form-control"
+              placeholder="Write the image url here.. "
+              aria-label="image"
+              aria-describedby="imageHelper"
+              name="image"
+            ></input>
+          </div>
+          <div className="input-group mb-2">
+            <span className="input-group-text" id="contentHelper">
+              Content
+            </span>
+            <textarea
+              onChange={(e) => handleInputChange(e)}
+              type="text-area"
+              className="form-control"
+              placeholder="Write the post content here..."
+              aria-label="content"
+              aria-describedby="contentHelper"
+              name="content"
+            ></textarea>
+          </div>
+          <button type="submit" className="form-control w-50 align-self-center">
+            Submit Edits
+          </button>
+        </form>
       </div>
     </>
   );
