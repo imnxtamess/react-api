@@ -4,9 +4,9 @@ const api_endpoint = "http://localhost:8000/api/v1/posts";
 export default function App() {
   const [posts, setPosts] = useState([]);
   const [isForm, setIsForm] = useState(false);
+  const [currentSlug, setCurrentSlug] = useState(null);
   const [formData, setFormData] = useState({
     title: "",
-    slug: "",
     tags: "",
     image: "",
     content: "",
@@ -42,16 +42,27 @@ export default function App() {
 
   function editData(url, slug) {
     console.log("You clicked me");
+    fetch(`${url}/${slug}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    }).then((res) => {
+      console.log(res);
+    });
   }
 
   function handleEditClick(slug) {
     console.log("Clicked Edit of" + slug);
+    setCurrentSlug(slug);
     setIsForm(true);
   }
 
   function handleFormSubmit(e) {
     e.preventDefault();
-    console.log(e);
+    console.log("edit submit for", currentSlug);
+    editData(api_endpoint, currentSlug);
   }
 
   function handleInputChange(e) {
@@ -138,20 +149,6 @@ export default function App() {
             ></input>
           </div>
 
-          <div className="input-group mb-3">
-            <span className="input-group-text" id="slugHelper">
-              Slug
-            </span>
-            <input
-              onChange={(e) => handleInputChange(e)}
-              type="text"
-              className="form-control"
-              placeholder="Write the post slug here..."
-              aria-label="slug"
-              aria-describedby="slugHelper"
-              name="slug"
-            ></input>
-          </div>
           <div className="input-group mb-3">
             <span className="input-group-text" id="tagsHelper">
               Tags
