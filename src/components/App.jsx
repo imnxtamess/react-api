@@ -23,9 +23,7 @@ export default function App() {
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setPosts(data);
-        console.log(posts);
       });
   }
 
@@ -57,6 +55,15 @@ export default function App() {
 
   function handleEditClick(slug) {
     console.log("Clicked Edit of" + slug);
+    const postToEdit = posts.find((post) => post.slug === slug);
+    if (postToEdit) {
+      setFormData({
+        title: postToEdit.title,
+        tags: postToEdit.tags,
+        image: postToEdit.image,
+        content: postToEdit.content,
+      });
+    }
     setCurrentSlug(slug);
     setIsForm(true);
   }
@@ -64,22 +71,19 @@ export default function App() {
   function handleFormSubmit(e) {
     e.preventDefault();
     console.log("edit submit for", currentSlug);
-    editData(api_endpoint, currentSlug);
-    setIsForm(false);
-    fetchData(api_endpoint);
+    editData(api_endpoint, currentSlug).then(() => {
+      setIsForm(false);
+      fetchData(api_endpoint);
+    });
   }
 
   function handleInputChange(e) {
     const name = e.target.name;
     const value = e.target.value;
-    console.log(name);
-    console.log(value);
-    console.log(e.target);
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
-    console.log(formData);
   }
 
   return (
@@ -100,14 +104,14 @@ export default function App() {
             </tr>
           </thead>
           <tbody>
-            {posts.map((post) => (
-              <tr key={post.slug}>
+            {posts.map((post, index) => (
+              <tr key={post.slug + index}>
                 <th scope="row">{post.slug}</th>
                 <td>{post.title}</td>
                 <td>
                   <img
                     src={`http://localhost:8000/imgs/posts/${post.image}`}
-                    alt=""
+                    alt={post.title}
                   />
                 </td>
                 <td className="text-start">
@@ -187,7 +191,6 @@ export default function App() {
             </span>
             <textarea
               onChange={(e) => handleInputChange(e)}
-              type="text-area"
               className="form-control"
               placeholder="Write the post content here..."
               aria-label="content"
