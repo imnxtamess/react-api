@@ -53,6 +53,20 @@ export default function App() {
       });
   }
 
+  function createData(url) {
+    return fetch(`${url}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+  }
+
   function handleEditClick(slug) {
     console.log("Clicked Edit of" + slug);
     console.log("posts array", posts);
@@ -72,7 +86,7 @@ export default function App() {
     setIsForm(true);
   }
 
-  function handleFormSubmit(e) {
+  function handleEditFormSubmit(e) {
     e.preventDefault();
     console.log("edit submit for", currentSlug);
     editData(api_endpoint, currentSlug).then(() => {
@@ -88,6 +102,15 @@ export default function App() {
       ...prevData,
       [name]: value,
     }));
+  }
+
+  function handleFormSubmit(e) {
+    e.preventDefault();
+    console.log("post added");
+    console.log(formData);
+    createData(api_endpoint).then(() => {
+      fetchData(api_endpoint);
+    });
   }
 
   return (
@@ -135,10 +158,76 @@ export default function App() {
         </table>
 
         <form
+          className="createForm row text-center flex-column justify-content-center mt-5"
           onSubmit={handleFormSubmit}
+        >
+          <h1>Create new Post</h1>
+          <div className="input-group mb-3">
+            <span className="input-group-text" id="basic-addon1">
+              Title
+            </span>
+            <input
+              onChange={(e) => handleInputChange(e)}
+              type="text"
+              className="form-control"
+              placeholder="Write the post title here..."
+              aria-label="title"
+              aria-describedby="basic-addon1"
+              name="title"
+            ></input>
+          </div>
+
+          <div className="input-group mb-3">
+            <span className="input-group-text" id="tagsHelper">
+              Tags
+            </span>
+            <input
+              onChange={(e) => handleInputChange(e)}
+              type="text"
+              className="form-control"
+              placeholder="Write the post tags here..."
+              aria-label="tags"
+              aria-describedby="tagsHelper"
+              name="tags"
+            ></input>
+          </div>
+          <div className="input-group mb-3">
+            <span className="input-group-text" id="imageHelper">
+              Image
+            </span>
+            <input
+              onChange={(e) => handleInputChange(e)}
+              type="text"
+              className="form-control"
+              placeholder="Write the image url here.. "
+              aria-label="image"
+              aria-describedby="imageHelper"
+              name="image"
+            ></input>
+          </div>
+          <div className="input-group mb-2">
+            <span className="input-group-text" id="contentHelper">
+              Content
+            </span>
+            <textarea
+              onChange={(e) => handleInputChange(e)}
+              className="form-control"
+              placeholder="Write the post content here..."
+              aria-label="content"
+              aria-describedby="contentHelper"
+              name="content"
+            ></textarea>
+          </div>
+          <button type="submit" className="form-control w-50 align-self-center">
+            Add Post
+          </button>
+        </form>
+
+        <form
+          onSubmit={handleEditFormSubmit}
           className={
             isForm
-              ? "text-center py-5 row flex-column justify-content-center"
+              ? "editForm text-center py-5 row flex-column justify-content-center"
               : "d-none"
           }
         >
