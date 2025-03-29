@@ -42,9 +42,11 @@ table {
   position: absolute;
   transform: translateY(-50%) translateX(-50%);
   left: 50%;
+  top: 65%;
   filter: opacity(98%);
   color: white;
   gap: 2rem;
+  z-index: 1000000000000;
 }
 
 .createForm {

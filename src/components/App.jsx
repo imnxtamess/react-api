@@ -188,7 +188,11 @@ export default function App() {
         </table>
 
         <form
-          className="createForm row text-center flex-column justify-content-center mt-5"
+          className={
+            isForm
+              ? "d-none"
+              : "createForm row text-center flex-column justify-content-center mt-5"
+          }
           onSubmit={handleFormSubmit}
         >
           <h1>Create new Post</h1>
@@ -274,6 +278,7 @@ export default function App() {
               aria-label="title"
               aria-describedby="basic-addon1"
               name="title"
+              defaultValue={formData.title}
             ></input>
           </div>
 
@@ -289,6 +294,7 @@ export default function App() {
               aria-label="tags"
               aria-describedby="tagsHelper"
               name="tags"
+              defaultValue={formData.tags}
             ></input>
           </div>
           <div className="input-group mb-3">
@@ -303,6 +309,7 @@ export default function App() {
               aria-label="image"
               aria-describedby="imageHelper"
               name="image"
+              defaultValue={formData.image}
             ></input>
           </div>
           <div className="input-group mb-2">
@@ -316,6 +323,7 @@ export default function App() {
               aria-label="content"
               aria-describedby="contentHelper"
               name="content"
+              defaultValue={formData.content}
             ></textarea>
           </div>
           <button type="submit" className="form-control w-50 align-self-center">
